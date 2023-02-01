@@ -1,12 +1,32 @@
 ---
-title: "I'm Passionate about Nailpolish."
+title: "I'm Passionate about Nail Polish."
 author: "Conley Kinkead"
 format: 
   html: 
     theme: quartz
 ---
 
-## 
+## Intro: I'm passionate about nail polish.
+
+I love nail polish. I love the colors, the finishes, the little glass bottles that I can display and organize. I love talking about nails, collecting nail polish, giving myself manicures, and mostly importantly, carrying joy with me everywhere I go (all I need to do is look down at my hands and see what makes me happy!)
+
+For most of my life, I've painted my nails using nail lacquers, but over the past couple months I have been learning how to do gel manicures. As such, lately I've amassed several gel polishes, soft gel extensions in various shapes and lengths (mostly coffin and stiletto), and many preparation, application, and gel removal tools.
+
+Things I will do with this project:
+
+-   create datasets of my gel nail polish and my lacquer nail polish, and then bind them into one larger data
+
+-   make a series of bar charts that provide information about my nail polish collection, such as counts of:
+
+    -   color families
+
+    -   number of polishes acquired per year (since 2018)
+
+    -   finishes (crème, glitter, neon, etc)
+
+    -   my favorite brands
+
+## Creating the datasets.
 
 ```{r}
 library(tidyverse)
@@ -53,6 +73,8 @@ print(nailpolish_laquer)
 nailpolish <- rbind(nailpolish_gel, nailpolish_laquer)
 print(nailpolish)
 ```
+
+## Starting to plot.
 
 ```{r}
 ggplot(nailpolish, aes(color_family)) + geom_bar()

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Conley Kinkead">
 
-<title>I’m Passionate about Nailpolish.</title>
+<title>I’m Passionate about Nail Polish.</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -109,7 +109,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">I’m Passionate about Nailpolish.</h1>
+<h1 class="title">I’m Passionate about Nail Polish.</h1>
 </div>
 
 
@@ -130,8 +130,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="intro-im-passionate-about-nail-polish." class="level2">
+<h2 class="anchored" data-anchor-id="intro-im-passionate-about-nail-polish.">Intro: I’m passionate about nail polish.</h2>
+<p>I love nail polish. I love the colors, the finishes, the little glass bottles that I can display and organize. I love talking about nails, collecting nail polish, giving myself manicures, and mostly importantly, carrying joy with me everywhere I go (all I need to do is look down at my hands and see what makes me happy!)</p>
+<p>For most of my life, I’ve painted my nails using nail lacquers, but over the past couple months I have been learning how to do gel manicures. As such, lately I’ve amassed several gel polishes, soft gel extensions in various shapes and lengths (mostly coffin and stiletto), and many preparation, application, and gel removal tools.</p>
+<p>Things I will do with this project:</p>
+<ul>
+<li><p>create datasets of my gel nail polish and my lacquer nail polish, and then bind them into one larger data</p></li>
+<li><p>make a series of bar charts that provide information about my nail polish collection, such as counts of:</p>
+<ul>
+<li><p>color families</p></li>
+<li><p>number of polishes acquired per year (since 2018)</p></li>
+<li><p>finishes (crème, glitter, neon, etc)</p></li>
+<li><p>my favorite brands</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="creating-the-data-sets." class="level2">
+<h2 class="anchored" data-anchor-id="creating-the-data-sets.">Creating the data sets.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -484,6 +500,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 72 lacquer       crème</code></pre>
 </div>
 </div>
+</section>
+<section id="starting-to-plot." class="level2">
+<h2 class="anchored" data-anchor-id="starting-to-plot.">Starting to plot.</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(nailpolish, <span class="fu">aes</span>(color_family)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
