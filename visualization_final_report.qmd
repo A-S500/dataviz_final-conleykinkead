@@ -1,9 +1,67 @@
 ---
-title: "Visualization Final Report"
-author: "Me!"
+title: "I'm Passionate about Nailpolish."
+author: "Conley Kinkead"
 format: 
   html: 
-    theme: cosmo
+    theme: quartz
 ---
 
 ## 
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+nailpolish_gel <- data.frame (name = c("Freshwater (gel)", "Pooh Bear", "Pineapples Have Peelings Too", "Anything Goes (gel)", "Addicted to Sparkle", "Ruby Red Glitz", "Jade Platinum", "Mellow Yellow (gel)", "604", "Iconic", "Princess Jasmine (gel)", "618", "614", "615", "DG11", "Hidden Treasure", "Green to Café Latte", "Crystal Ball", "622", "611", "613", "616", "617", "612", "608", "619", "609", "607", "621", "620", "610", "603", "606", "605"),
+                         
+                          brand = c("iGel Beauty", "Aigel", "OPI", "Orly", "Aigel", "Nobility", "DND", "iGel Beauty", "Beetles", "Kiara Sky", "iGel Beauty", "Beetles", "Beetles", "Beetles", "Sumika", "Aigel", "DND", "Kiara Sky", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles"),
+                         
+                          color_family = c("blue", "multi", "yellow", "multi", "green", "maroon", "blue", "yellow", "pink", "blue", "green", "orange", "yellow", "pink", "blue", "multi", "mood", "mood", "pink", "pink", "green", "pink", "red", "purple", "yellow", "blue", "pink", "purple", "purple", "purple", "orange", "pink", "pink", "blue"),
+                          
+                         year_acquired = c("2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022"),
+                         
+                         type = c("gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel"),
+                         
+                         finish = c("crème", "glitter", "glitter", "shimmer", "glitter", "glitter", "glitter", "crème", "crème", "crème", "crème", "neon", "neon", "neon", "iredescent", "glitter", "crème", "crème", "glitter", "glitter", "neon", "neon", "neon", "glitter", "crème", "neon", "crème", "crème", "glitter", "neon", "crème", "crème", "crème", "crème")
+                         )
+print(nailpolish_gel)
+```
+
+```{r}
+nailpolish_laquer <- data.frame(
+    
+    name = c("Off Tropic", "Estatic Prismatic", "Cele-bert", "Emerald Sparkle", "Josie", "Aurora Borealis", "but first, candy", "Celtic Sun", "Chameleon", "Princess Jasmine (lacquer)", "Freshwater (lacquer)", "Surf's Up!", "Deliciously Wicked", "Seas the Day", "Miami Ice", "spun in luxe", "Aruba Blue", "Get Up", "Turn it Up", "Sun, Sea, and Sand in My Pants", "Mellow Yellow (lacquer)", "Taupe", "can't stop her in copper", "Master Plan", "One and the Same", "Kismet", "Cozu-Melted in the Sun", "bonbon nuit", "Desirable", "Uninhibited", "congrats", "Pick Me Up", "Magnetic", "Show Us Your Tips!", "sights on nightlights", "Grape Shifter", "Anything Goes (lacquer)", "White on White"),
+    
+    brand = c("essie", "OPI", "China Glaze", "China Glaze", "Zoya", "Mineral Fusion", "essie", "China Glaze", "Revlon", "iGel Beauty", "iGel Beauty", "Colors by Llarowe", "China Glaze", "Mineral Fusion", "Sally Hansen", "essie", "essie", "Bow", "Orly", "OPI", "iGel Beauty", "Mineral Fusion", "essie", "essie", "Emily de Molly", "Color Club", "OPI", "essie", "Revlon", "Revlon", "essie", "ILNP", "Revlon", "OPI", "essie", "Sally Hansen", "Orly", "China Glaze"),
+    
+    color_family = c("green", "green", "green", "green", "green", "green", "green", "green", "gold", "green", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "brown", "multi", "yellow", "yellow", "neutral", "gold", "neutral", "orange", "gold", "pink", "pink", "pink", "red", "purple", "purple", "purple", "purple", "purple", "purple", "multi", "white"),
+
+    year_acquired = c("2020", "2021", "2019", "2018", "2022", "2020", "2021", "2022", "2019", "2022", "2022", "2021", "2019", "2021", "2021", "2020", "2021", "2021", "2022", "2020", "2022", "2021", "2021", "2019", "2021", "2021", "2020", "2021", "2019", "2019", "2021", "2022", "2019", "2020", "2019", "2019", "2022", "2020"),
+    
+    type = c("lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer","lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer"),
+    
+    finish = c("crème", "shimmer", "glitter", "glitter", "crème", "shimmer", "glaze", "neon", "iredescent", "crème", "crème", "duochrome", "glitter", "crème", "neon", "satin", "shimmer", "magnetic", "topper", "crème", "crème", "pearl", "textured", "crème", "shimmer", "holographic", "shimmer", "iredescent", "shimmer", "shimmer", "glitter", "holographic", "glitter", "shimmer", "crème", "glitter", "shimmer", "crème")
+    
+    
+)
+
+print(nailpolish_laquer)
+```
+
+```{r}
+nailpolish <- rbind(nailpolish_gel, nailpolish_laquer)
+print(nailpolish)
+```
+
+```{r}
+ggplot(nailpolish, aes(color_family)) + geom_bar()
+```
+
+```{r}
+glimpse(nailpolish)
+```
+
+https://kiarasky.com/blogs/news/our-guide-to-the-different-nail-polish-finishes
+
+plan: panels of bar graphs that measure count of color_family, count of brand, count of year acquired, count of type
