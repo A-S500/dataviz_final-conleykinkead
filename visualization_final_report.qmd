@@ -6,11 +6,15 @@ format:
     theme: quartz
 ---
 
-## Intro: I'm passionate about nail polish.
+![Showing off my collection in 2021 (edited)](images/so-many-polishes.png){fig-align="center"}
+
+## Project introduction: I'm passionate about nail polish
 
 I love nail polish. I love the colors, the finishes, the little glass bottles that I can display and organize. I love talking about nails, collecting nail polish, giving myself manicures, and mostly importantly, carrying joy with me everywhere I go (all I need to do is look down at my hands and see what makes me happy!)
 
 For most of my life, I've painted my nails using nail lacquers, but over the past couple months I have been learning how to do gel manicures. As such, lately I've amassed several gel polishes, soft gel extensions in various shapes and lengths (mostly coffin and stiletto), and many preparation, application, and gel removal tools.
+
+![Proudly snapping a photo of my collection in 2019](images/IMG_9417.JPG){fig-align="center" width="451"}
 
 Things I will do with this project:
 
@@ -26,7 +30,7 @@ Things I will do with this project:
 
     -   my favorite brands
 
-## Creating the datasets.
+## Creating the datasets
 
 ```{r}
 library(tidyverse)
@@ -74,7 +78,7 @@ nailpolish <- rbind(nailpolish_gel, nailpolish_laquer)
 print(nailpolish)
 ```
 
-## Starting to plot.
+## Starting to plot
 
 ```{r}
 ggplot(nailpolish, aes(color_family)) + geom_bar()
