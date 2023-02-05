@@ -43,7 +43,8 @@ nailpolish_gel <- data.frame (name = c("Freshwater (gel)", "Pooh Bear", "Pineapp
                          
                           brand = c("iGel Beauty", "Aigel", "OPI", "Orly", "Aigel", "Nobility", "DND", "iGel Beauty", "Beetles", "Kiara Sky", "iGel Beauty", "Beetles", "Beetles", "Beetles", "Sumika", "Aigel", "DND", "Kiara Sky", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles"),
                          
-                          color_family = c("blue", "multi", "yellow", "multi", "green", "maroon", "blue", "yellow", "pink", "blue", "green", "orange", "yellow", "pink", "blue", "multi", "mood", "mood", "pink", "pink", "green", "pink", "red", "purple", "yellow", "blue", "pink", "purple", "purple", "purple", "orange", "pink", "pink", "blue"),
+                          color_family = c("blue", "multi", "yellow", "multi", "green", "maroon", "blue", "yellow", "pink", "blue", "green", "orange", "yellow", "pink", "blue", "multi", "mood", "mood", "pink", "pink", "green", "pink", "red", "blue", "yellow", "blue", "pink", "purple", "purple", "purple", "orange", "pink", "pink", "blue"),
+                          color_hex = c("#A9CFDC", "#BE969D", "#DEBB75", "#B9A3B1", "#A8C6BF", "#733566", "#4291C8", "#EFE669", "#F7C9B7", "#CEE6E2", "#6BA8A2", "#EB5328", "#E1F14F", "#E93C82", "#A2C0B8", "#CE9AA4", "#8FA260", "#799DC9", "#CFB19A", "#E6CAD6", "#EB5B6D", "#EA526B", "#DF4126", "#98AFBC", "#FCEDBA", "#194584", "#DCB4E4", "#9793C9", "#A19AB7", "#603292", "#F1BAA2", "#EFDDE4", "#E0ABB1", "#AFE8E2"),
                           
                          year_acquired = c("2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022"),
                          
@@ -61,7 +62,9 @@ nailpolish_laquer <- data.frame(
     
     brand = c("essie", "OPI", "China Glaze", "China Glaze", "Zoya", "Mineral Fusion", "essie", "China Glaze", "Revlon", "iGel Beauty", "iGel Beauty", "Colors by Llarowe", "China Glaze", "Mineral Fusion", "Sally Hansen", "essie", "essie", "Bow", "Orly", "OPI", "iGel Beauty", "Mineral Fusion", "essie", "essie", "Emily de Molly", "Color Club", "OPI", "essie", "Revlon", "Revlon", "essie", "ILNP", "Revlon", "OPI", "essie", "Sally Hansen", "Orly", "China Glaze", "Color Club"),
     
-    color_family = c("green", "green", "green", "green", "green", "green", "green", "green", "gold", "green", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "brown", "multi", "yellow", "yellow", "neutral", "gold", "neutral", "orange", "gold", "pink", "pink", "pink", "red", "purple", "purple", "purple", "purple", "purple", "purple", "multi", "white", "multi"),
+    color_family = c("green", "green", "green", "green", "green", "green", "green", "green", "gold", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "blue", "brown", "multi", "yellow", "yellow", "neutral", "gold", "neutral", "orange", "gold", "pink", "pink", "pink", "red", "purple", "purple", "purple", "purple", "purple", "purple", "multi", "white", "multi"),
+    
+    color_hex = c("#20382F", "#81ADAF", "#AEB191", "#38775F", "#518B51", "#86A79C", "#337536", "#DDF868", "#726D49", "#6BA8A2", "#A9CFDC", "#436D8E", "#97ADBE", "#9DC5C6", "#65E0F7", "#494B53", "#0C3EC7", "#6A4631", "#A7283F", "#E1A93A", "#EFE669", "#958076", "#B6916D", "#AC9C94", "#D89164", "#CDCEB9", "#E1968F", "#DFD1D6", "#BF8D9D", "#AF4839", "#CCC9DB", "#B091CA", "#7464A7", "#A4B2DE", "#281528", "#5E578A", "#B9A3B1", "#FFFFFF", "#F9FBFA"),
 
     year_acquired = c("2020", "2021", "2019", "2018", "2022", "2020", "2021", "2022", "2019", "2022", "2022", "2021", "2019", "2021", "2021", "2020", "2021", "2021", "2022", "2020", "2022", "2021", "2021", "2019", "2021", "2021", "2020", "2021", "2019", "2019", "2021", "2022", "2019", "2020", "2019", "2019", "2022", "2020", "2021"),
     
