@@ -1,0 +1,35 @@
+---
+title: "nail polish colors"
+format: html
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+## Running Code
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+```{r}
+library(colorfindr)
+```
+
+```{r}
+get_colors(
+  img = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.shopify.com%2Fs%2Ffiles%2F1%2F0848%2F7808%2Fproducts%2Fbeyond-polish-opi-nail-lacquer-ecstatic-prismatic-05-oz-nlc78-2_grande.jpg%3Fv%3D1579481905&f=1&nofb=1&ipt=f5caa0c9454e5da183a000425d81268221f13ac3a3dbdfacd0d2e160c84036d0&ipo=images", top_n = TRUE
+)
+```

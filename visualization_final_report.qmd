@@ -86,7 +86,8 @@ print(nailpolish)
 ## Starting to plot
 
 ```{r}
-ggplot(nailpolish, aes(color_family)) + geom_bar()
+ggplot(nailpolish, aes(color_family, fill = color_family)) + 
+  geom_bar()
 ```
 
 ```{r}
@@ -96,3 +97,70 @@ glimpse(nailpolish)
 https://kiarasky.com/blogs/news/our-guide-to-the-different-nail-polish-finishes
 
 plan: panels of bar graphs that measure count of color_family, count of brand, count of year acquired, count of type
+
+```{r}
+ggplot(nailpolish, aes(brand, fill = color_family)) + 
+  geom_bar()
+```
+
+```{r}
+ggplot(nailpolish, aes(color_family, fill = finish)) + 
+  geom_bar()
+```
+
+```{r}
+ggplot(nailpolish, aes(finish, fill = color_family)) + 
+  geom_bar()
+```
+
+```{r}
+nailpolish$year_acquired <- as.numeric(as.character(nailpolish$year_acquired))
+print(nailpolish)
+sapply(nailpolish, class)
+```
+
+```{r}
+ggplot(nailpolish, aes(finish, year_acquired, color = color_family)) + 
+  geom_point()
+```
+
+Need to color_family points to correspond with the color.
+
+```{r}
+ggplot(nailpolish, aes(color_family, year_acquired, fill = color_family)) + 
+  geom_bin_2d()
+```
+
+```{r}
+ggplot(nailpolish, aes(color_family, year_acquired, fill = color_family)) + 
+  stat_bin_2d()
+```
+
+```{r}
+ggplot(nailpolish, aes(year_acquired, color_family, fill = color_family)) + 
+  stat_bin_2d()
+```
+
+```{r}
+ggplot(nailpolish, aes(year_acquired, finish, fill = color_family)) + 
+  stat_bin_2d()
+```
+
+```{r}
+ggplot(nailpolish, aes(year_acquired, brand, fill = color_family)) + 
+  stat_bin_2d()
+```
+
+```{r}
+ggplot(nailpolish, aes(color_family, year_acquired, color = color_family)) + 
+  geom_jitter()
+```
+
+```{r}
+library(ggbeeswarm)
+```
+
+```{r}
+ggplot(nailpolish, aes(year_acquired, color_family, color = color_family)) + 
+  geom_jitter()
+```

@@ -1,0 +1,38 @@
+---
+title: "scratch-page"
+format: html
+---
+
+```{r}
+library(palmerpenguins)
+```
+
+```{r}
+glimpse(penguins)
+```
+
+```{r}
+nail_test <- nailpolish
+```
+
+```{r}
+glimpse(nail_test)
+```
+
+```{r}
+nail_test$year_acquired <- as.numeric(as.character(nail_test$year_acquired))
+print(nail_test)
+sapply(nail_test, class)
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+sapply(nail_test, class)
+```
+
+```{r}
+nail_test
+```
