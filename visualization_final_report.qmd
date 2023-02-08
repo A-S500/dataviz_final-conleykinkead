@@ -162,5 +162,48 @@ library(ggbeeswarm)
 
 ```{r}
 ggplot(nailpolish, aes(year_acquired, color_family, color = color_family)) + 
-  geom_jitter()
+  geom_jitter() +
+  stat_ellipse()
 ```
+
+```{r}
+ggplot(nailpolish, aes(year_acquired, fill = color_hex)) + 
+  stat_bin(binwidth = 1, position = "fill") +
+  scale_fill_identity()
+```
+
+```{r}
+nailpolish |>
+  group_by(color_family) |>
+  mutate(n = row_number()) |>
+  ggplot(aes(color_family, n, fill = color_hex))+
+    geom_raster()+
+    scale_fill_identity()
+```
+
+```{r}
+ggplot(nailpolish, aes(color_family, color = color_hex)) + 
+  geom_dotplot(
+    fill = "white",
+    size = 10,
+    alpha = 0.9
+  ) +
+  scale_color_identity()
+#  scale_color_manual( 
+ #   values = c("blue", "brown", "gold"), 
+  #  limits = c("blue", "brown", "gold")
+  # )
+```
+
+how do i do this but show the actual count?
+
+```{r}
+ggplot(nailpolish, aes(color_family, year_acquired, fill = finish)) + 
+  geom_violin()
+```
+
+what if i multiplied all counts by 100 so none would be dropped?
+
+could facet by finish
+
+check out colorspace - HCL wizard
