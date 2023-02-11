@@ -154,8 +154,55 @@ facet_wrap(~type)
 ```
 
 ```{r}
+ggplot(nailpolish_laquer, aes(year_acquired, color_family, color = color_hex)) + 
+  geom_jitter(size = 5) +
+  scale_color_identity() +
+  labs(
+    y = "",
+    x = "year acquired",
+    title = "lacquer polish names") +
+    theme(panel.background = element_rect(fill = "gray94"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "gray94"),
+        plot.title = element_text(size = 15, color = "gray20"),
+        axis.text.x = element_text(size = 10, color = "gray50"),
+        axis.ticks.x = element_line(color = "grey50"),
+        axis.title.x = element_text(size = 10, color = "gray50"),
+        axis.ticks = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none"
+        ) +
+    coord_cartesian(clip = "off") +
+geom_text_repel(aes(label = name), bg.color = "grey96", bg.r = .4)
+```
+
+```{r}
+ggplot(nailpolish_gel, aes(year_acquired, color_family, color = color_hex)) + 
+  geom_jitter(size = 5) +
+  scale_color_identity() +
+  labs(
+    y = "",
+    x = "all acquired in 2022",
+    title = "gel polish names") +
+    theme(panel.background = element_rect(fill = "gray94"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "gray94"),
+        plot.title = element_text(size = 15, color = "gray20"),
+        axis.text.x = element_blank(),
+        axis.title.x = element_text(size = 10, color = "gray50"),
+        axis.ticks = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none"
+        ) +
+    coord_cartesian(clip = "off") +
+geom_text_repel(aes(label = name), bg.color = "grey96", bg.r = .7, max.overlaps = Inf)
+```
+
+```{r}
 acq1 <- ggplot(nailpolish, aes(year_acquired, color_family, color = color_hex)) + 
-  geom_jitter(size = 6) +
+  geom_jitter(size = 14) +
   scale_color_identity() +
   labs(
     y = "",
@@ -171,7 +218,7 @@ acq1 <- ggplot(nailpolish, aes(year_acquired, color_family, color = color_hex)) 
         axis.ticks = element_blank(),
         axis.text.y = element_blank(),
         legend.position = "none"
-        )
+        ) + coord_cartesian(clip = "off") 
 acq1
 ```
 
@@ -223,9 +270,8 @@ acq3
 
 -   Again, for the most part, simple geometries were used to keep more focus on the colors.
 
-```{=html}
-<!-- -->
-```
 -   I could not change the font using showtext. I repeatedly got the following error: `Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : polygon edge not found`. The internet tells me this can be a common issue. Hopefully I can get this working in the future.
+
+-   The ggrepel labels background should be changed based on the text color.
 
 -   I'd like to change the page theme so the background color is the same grey as the plot backgrounds. I'd like to match the fonts used in the plots to the ones on this page as well.
