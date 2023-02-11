@@ -80,3 +80,72 @@ ggplot(nailpolish, aes(year_acquired, fill = color_hex)) +
   stat_bin(binwidth = 1, position = "fill") +
   scale_fill_identity()
 ```
+
+```{r}
+nailpolish |>
+  group_by(color_family) |>
+  mutate(n = row_number()) |>
+  ggplot(aes(color_family, n, fill = color_hex)) +
+    geom_raster() +
+    scale_fill_identity() +
+  labs(
+    y = "",
+    x = "",
+    title = "polishes per color family") +
+  scale_y_discrete=(breaks = c("4", "8", "12", "16")) +
+  theme(panel.background = element_rect(fill = "gray93"),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        plot.background = element_rect(fill = "gray93"),
+        plot.title = element_text(size = 17, hjust = .95),
+        axis.text.x = element_text(size = 9, color = "black"),
+        axis.ticks.x = element_blank(),
+        axis.text.y = element_text(size = 8, color = "gray20")
+        )
+```
+
+```{r}
+ggplot(nailpolish, aes(finish, year_acquired, fill = color_family)) + 
+  stat_bin_2d() +
+    labs(
+    y = "",
+    x = "",
+    title = "polishes by finish") +
+  theme(panel.background = element_rect(fill = "gray98"),
+      #  panel.grid.minor = element_blank(),
+       # panel.grid.major = element_blank(),
+        #plot.background = element_rect(fill = "gray98"),
+        plot.title = element_text(size = 17, hjust = .95),
+        axis.text.x = element_text(size = 9, color = "black"),
+       # axis.ticks = element_blank(),
+        axis.text.y = element_text(size = 7, color = "gray20")
+        ) +
+  scale_fill_manual(values = c("blue", "brown", "gold", "green", "maroon",   "cornflowerblue", "dodgerblue", "beige", "orange", "pink", "purple", "red", "white", "yellow"))
+```
+
+```{r}
+ggplot(nailpolish, aes(finish, fill = color_family)) + 
+  geom_bar() +
+    labs(
+    y = "",
+    x = "",
+    title = "polishes by finish") +
+  scale_y_continuous(breaks = c(4, 8, 12, 16, 20)) +
+  theme(panel.background = element_rect(fill = "gray98"),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        plot.background = element_rect(fill = "gray98"),
+        plot.title = element_text(size = 17, hjust = .95),
+        axis.text.x = element_text(size = 9, color = "black", angle = 45),
+        axis.ticks = element_blank(),
+        axis.text.y = element_text(size = 7, color = "gray20")
+        ) +
+  scale_fill_manual(values = c("blue", "brown", "gold", "green", "maroon",   "cornflowerblue", "dodgerblue", "beige", "orange", "pink", "purple", "red", "white", "yellow"))
+                                      
+# move x markers down, change legend, change colors
+```
+
+```{r}
+ggplot(nailpolish, aes(finish, year_acquired, fill = color_family)) + 
+  geom_bin_2d()
+```

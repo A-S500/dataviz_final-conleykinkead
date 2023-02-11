@@ -1,40 +1,17 @@
 ---
-title: "I'm Passionate about Nail Polish."
+title: "I'm Passionate about Nail Polish"
 author: "Conley Kinkead"
 format: 
   html: 
     theme: 
       - cosmo
-      - custom.scss
 ---
 
-![Showing off my collection in 2021 (edited)](images/so-many-polishes.png){fig-align="center"}
+![Showing off my collection in 2021 (edited)](images/so-many-polishes.png){alt="Showing off my collection in 2021 (edited)" fig-align="center"}
 
-## Project introduction: I'm passionate about nail polish
+## Project introduction
 
 I love nail polish. I love the colors, the finishes, the little glass bottles that I can display and organize. I love talking about nails, collecting nail polish, giving myself manicures, and mostly importantly, carrying joy with me everywhere I go (all I need to do is look down at my hands and see what makes me happy!)
-
-    :::  {layout-ncol=2}
-    ![Proudly snapping a photo of my collection in 2019](images/IMG_9417.JPG)
-
-    ![Curing a layer of my NYE manicure in 2022](images/IMG_1645.JPEG)
-    :::
-
-::: {#test}
-    ::: {#fig-elephant}
-
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/SNggmeilXDQ"></iframe>
-
-    Elephant
-    :::
-:::
-
-{layout-ncol=2}
-!\[Proudly snapping a photo of my collection in 2019\](images/IMG_9417.JPG)
-
-!\[Curing a layer of my NYE manicure in 2022\](images/IMG_1645.JPEG) :::
-
-{layout-ncol=2} ![Proudly snapping a photo of my collection in 2019](images/IMG_9417.JPG){fig-align="right" width="400"}![Curing a layer of my NYE manicure in 2022](images/IMG_1645.JPEG){alt="Curing a layer of my NYE day manicure, 2022" fig-align="right" width="400"}
 
 For most of my life, I've painted my nails using nail lacquers, but over the past couple months I have been learning how to do gel manicures. As such, lately I've amassed several gel polishes, soft gel extensions in various shapes and lengths (mostly coffin and stiletto), and many preparation, application, and gel removal tools.
 
@@ -42,7 +19,7 @@ Things I will do with this project:
 
 -   create datasets of my gel nail polish and my lacquer nail polish, and then bind them into one larger data
 
--   make a series of bar charts that provide information about my nail polish collection, such as counts of:
+-   make a series of plots that provide information about my nail polish collection, such as:
 
     -   color families
 
@@ -52,13 +29,22 @@ Things I will do with this project:
 
     -   my favorite brands
 
+![a rough starting sketch](images/2023_r-nailpolish.png){fig-align="center" width="400"}
+
 ## Creating the datasets
 
 Because I have so many nail polishes, I created two datasets for this project and then combined them. The first data set consisted of gel polishes, and the second consisted of lacquers. I combined them using `rbind()`.
 
 ```{r}
 library(tidyverse)
+library(ggrepel)
+library(patchwork)
+```
+
+```{r}
 library(showtext)
+font_add_google(name = "Lobster", family = "Lobster")
+font_add_google(name = "Ubuntu", family = "Ubuntu")
 font_add_google(name = "Poppins", family = "Poppins")
 ```
 
@@ -75,8 +61,7 @@ nailpolish_gel <- data.frame (name = c("Freshwater (gel)", "Pooh Bear", "Pineapp
                          type = c("gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel", "gel"),
                          
                          finish = c("crème", "glitter", "glitter", "shimmer", "glitter", "glitter", "glitter", "crème", "crème", "crème", "crème", "neon", "neon", "neon", "iredescent", "glitter", "crème", "crème", "glitter", "glitter", "neon", "neon", "neon", "glitter", "crème", "neon", "crème", "crème", "glitter", "neon", "crème", "crème", "crème", "crème")
-                         )
-print(nailpolish_gel)
+)
 ```
 
 ```{r}
@@ -95,61 +80,16 @@ nailpolish_laquer <- data.frame(
     type = c("lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer","lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer", "lacquer"),
     
     finish = c("crème", "shimmer", "glitter", "glitter", "crème", "shimmer", "glaze", "neon", "iredescent", "crème", "crème", "duochrome", "glitter", "crème", "neon", "satin", "shimmer", "magnetic", "topper", "crème", "crème", "pearl", "textured", "crème", "shimmer", "holographic", "shimmer", "iredescent", "shimmer", "shimmer", "glitter", "holographic", "glitter", "shimmer", "crème", "glitter", "shimmer", "crème", "shimmer")
-    
-    
 )
-
-print(nailpolish_laquer)
 ```
 
 ```{r}
 nailpolish <- rbind(nailpolish_gel, nailpolish_laquer)
-print(nailpolish)
-```
-
-```{r}
 nailpolish$year_acquired <- as.numeric(as.character(nailpolish$year_acquired))
-print(nailpolish)
 sapply(nailpolish, class)
 ```
 
-## Starting to plot
-
-### Taking a look at the data with quick & messy plots
-
-```{r}
-ggplot(nailpolish, aes(color_family, year_acquired, color = color_family)) + 
-  geom_point()
-```
-
-```{r}
-ggplot(nailpolish, aes(color_family, fill = color_family)) + 
-  geom_bar()
-```
-
-```{r}
-ggplot(nailpolish, aes(brand, fill = color_family)) + 
-  geom_bar()
-```
-
-```{r}
-ggplot(nailpolish, aes(finish, year_acquired, color = color_family)) + 
-  geom_point()
-```
-
-```{r}
-ggplot(nailpolish, aes(color_family, fill = finish)) + 
-  geom_bar()
-```
-
-```{r}
-library(showtext)
-font_add_google(name = "Lobster", family = "Lobster")
-font_add_google(name = "Ubuntu", family = "Ubuntu")
-font_add_google(name = "Poppins", family = "Poppins")
-```
-
-## Polished plots
+## Plots
 
 ```{r}
 nailpolish |>
@@ -159,114 +99,133 @@ nailpolish |>
     geom_raster() +
     scale_fill_identity() +
   labs(
-    y = "",
+    y = "count",
     x = "",
-    title = "polishes by color family") +
+    title = "colors within each color family") +
   scale_y_continuous(breaks = c(4, 8, 12)) +
-  theme(panel.background = element_rect(fill = "gray93"),
-        panel.grid.minor = element_blank(),
-        panel.grid.major = element_blank(),
-        plot.background = element_rect(fill = "gray93"),
-        plot.title = element_text(size = 17, hjust = .95),
+  theme(panel.background = element_rect(fill = "gray94"),
+        plot.background = element_rect(fill = "gray94"),
+        plot.title = element_text(size = 15,),
         axis.text.x = element_text(size = 9, color = "black"),
         axis.ticks = element_blank(),
         axis.text.y = element_text(size = 7, color = "gray20")
         )
-# need to move up x markers and extend axis slightly, and move title down slightly
 ```
 
 ```{r}
-ggplot(nailpolish, aes(finish, fill = color_family)) + 
-  geom_bar()
-```
-
-```{r}
-ggplot(nailpolish, aes(color_family, year_acquired, fill = color_family)) + 
-  geom_bin_2d()
-```
-
-```{r}
-ggplot(nailpolish, aes(color_family, year_acquired, fill = color_family)) + 
-  stat_bin_2d()
-```
-
-```{r}
-ggplot(nailpolish, aes(year_acquired, color_family, fill = color_family)) + 
-  stat_bin_2d()
-```
-
-```{r}
-ggplot(nailpolish, aes(year_acquired, finish, fill = color_family)) + 
-  stat_bin_2d()
-```
-
-```{r}
-ggplot(nailpolish, aes(color_family, brand, fill = color_family)) + 
-  stat_bin_2d()
-```
-
-```{r}
-ggplot(nailpolish, aes(color_family, year_acquired, color = color_hex)) + 
-  geom_jitter() +
-  scale_color_identity()
-```
-
-```{r}
-ggplot(nailpolish, aes(year_acquired, color_family, color = color_family)) + 
-  geom_jitter() +
-  stat_ellipse()
-```
-
-```{r}
-ggplot(nailpolish, aes(year_acquired, color_family, color = color_hex)) + 
-  geom_jitter() +
-  scale_color_identity()
-```
-
-```{r}
-ggplot(nailpolish, aes(year_acquired, fill = color_hex)) + 
-  stat_bin(binwidth = 1, position = "fill") +
+ggplot(nailpolish, aes(color_family, finish, fill = color_hex)) + 
+  stat_bin_2d() +
+    labs(
+    y = "",
+    x = "",
+    title = "finishes") +
+  theme(panel.background = element_rect(fill = "gray94"),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "gray94"),
+        plot.title = element_text(size = 15, color = "gray20"),
+        axis.text.x = element_text(size = 7, color = "gray20"),
+        axis.ticks = element_blank(),
+        axis.text.y = element_text(size = 10, color = "gray20")
+        ) +
   scale_fill_identity()
 ```
 
 ```{r}
-nailpolish |>
-  group_by(color_family) |>
-  mutate(n = row_number()) |>
-  ggplot(aes(color_family, n, fill = color_hex))+
-    geom_raster()+
-    scale_fill_identity()
+ggplot(nailpolish, aes(x = color_family, y = reorder(brand, desc(brand)), fill = color_family)) + 
+  stat_bin_2d() +
+  scale_fill_manual(values = c("#4291C8", "#6A4631", "#B6916D", "#38775F", "#733566",   "#8FA260", "#CE9AA4", "#AC9C94", "#EB5328", "#E1968F", "#7464A7", "#DF4126", "white", "#EFE669")) + 
+  labs(
+    y = "",
+    x = "color family",
+    title = "brands") +
+    theme(panel.background = element_rect(fill = "gray94"),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "gray94"),
+        plot.title = element_text(size = 15, color = "gray20"),
+        axis.text.x = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.y = element_text(size = 10, color = "gray20"),
+        axis.title.x = element_text(size = 10, color = "gray20"),
+        strip.background = element_rect(fill = "gray94"),
+        strip.text = element_text(size = 10, color = "gray20"),
+        legend.position = "none"
+        ) +
+facet_wrap(~type)
 ```
 
 ```{r}
-ggplot(nailpolish, aes(color_family, color = color_hex)) + 
-  geom_dotplot(
-    fill = "white",
-    size = 10,
-    alpha = 0.9
-  ) +
-  scale_color_identity()
-#  scale_color_manual( 
- #   values = c("blue", "brown", "gold"), 
-  #  limits = c("blue", "brown", "gold")
-  # )
+acq1 <- ggplot(nailpolish, aes(year_acquired, color_family, color = color_hex)) + 
+  geom_jitter(size = 6) +
+  scale_color_identity() +
+  labs(
+    y = "",
+    x = "",
+    title = "colors acquired 2018-2022") +
+    theme(panel.background = element_rect(fill = "gray94"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "gray94"),
+        plot.title = element_text(size = 15, color = "gray20"),
+        axis.text.x = element_text(size = 10, color = "gray50"),
+        axis.ticks.x = element_line(color = "grey50"),
+        axis.ticks = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none"
+        )
+acq1
 ```
-
-how do i do this but show the actual count?
 
 ```{r}
-ggplot(nailpolish, aes(color_family, year_acquired, fill = finish)) + 
-  geom_violin()
+acq2 <- ggplot(nailpolish, aes(year_acquired, fill = color_hex)) + 
+  stat_bin(binwidth = 1, position = "fill") +
+  scale_fill_identity() +
+    labs(
+    y = "",
+    x = "",
+    title = "colors acquired 2018-2022") +
+    theme(panel.background = element_rect(fill = "gray94"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "gray94"),
+        plot.title = element_text(size = 15, color = "gray20"),
+        axis.text.x = element_text(size = 10, color = "gray50"),
+        axis.ticks.x = element_line(color = "grey50"),
+        axis.ticks = element_blank(),
+        axis.text.y = element_blank(),
+        legend.position = "none"
+        )
+acq2
 ```
 
-what if i multiplied all counts by 100 so none would be dropped?
+```{r}
+acq3 <- ggplot(nailpolish, aes(color_family, year_acquired, fill = color_family)) + 
+  geom_violin() +
+    scale_fill_manual(values = c("#4291C8", "#B6916D", "#38775F", "#733566", "#CE9AA4", "#AC9C94", "#EB5328", "#E1968F", "#7464A7", "#DF4126", "#EFE669")) + 
+  labs(
+    y = "",
+    x = "",
+    title = "colors acquired 2018-2022") +
+    theme(panel.background = element_rect(fill = "gray94"),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "gray94"),
+        plot.title = element_text(size = 15, color = "gray20"),
+        
+        axis.ticks = element_blank(),
+        axis.text.y = element_text(size = 10, color = "gray20"),
+        legend.position = "none"
+        ) 
+acq3
+```
 
-could facet by finish
+## Evaluation, issues, and work for the future
 
-check out colorspace - HCL wizard
+-   I chose to use the grey theming in hopes that it would showcase the colors representing the polishes. I think this worked out pretty well. I spent a lot of time tweaking axis titles, labels, and markers to make them readable but subtle.
 
-https://kiarasky.com/blogs/news/our-guide-to-the-different-nail-polish-finishes
+-   Again, for the most part, simple geometries were used to keep more focus on the colors.
 
-### Issues
+```{=html}
+<!-- -->
+```
+-   I could not change the font using showtext. I repeatedly got the following error: `Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : polygon edge not found`. The internet tells me this can be a common issue. Hopefully I can get this working in the future.
 
-I could not change the font using showtext. I repeatedly got the following error: `Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : polygon edge not found`, which the internet tells me could be a buggy thing?
+-   I'd like to change the page theme so the background color is the same grey as the plot backgrounds. I'd like to match the fonts used in the plots to the ones on this page as well.
