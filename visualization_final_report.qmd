@@ -3,7 +3,9 @@ title: "I'm Passionate about Nail Polish."
 author: "Conley Kinkead"
 format: 
   html: 
-    theme: quartz
+    theme: 
+      - cosmo
+      - custom.scss
 ---
 
 ![Showing off my collection in 2021 (edited)](images/so-many-polishes.png){fig-align="center"}
@@ -12,11 +14,29 @@ format:
 
 I love nail polish. I love the colors, the finishes, the little glass bottles that I can display and organize. I love talking about nails, collecting nail polish, giving myself manicures, and mostly importantly, carrying joy with me everywhere I go (all I need to do is look down at my hands and see what makes me happy!)
 
-![Proudly snapping a photo of my collection in 2019](images/IMG_9417.JPG){fig-align="center" width="400"}
+    :::  {layout-ncol=2}
+    ![Proudly snapping a photo of my collection in 2019](images/IMG_9417.JPG)
+
+    ![Curing a layer of my NYE manicure in 2022](images/IMG_1645.JPEG)
+    :::
+
+::: {#test}
+    ::: {#fig-elephant}
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/SNggmeilXDQ"></iframe>
+
+    Elephant
+    :::
+:::
+
+{layout-ncol=2}
+!\[Proudly snapping a photo of my collection in 2019\](images/IMG_9417.JPG)
+
+!\[Curing a layer of my NYE manicure in 2022\](images/IMG_1645.JPEG) :::
+
+{layout-ncol=2} ![Proudly snapping a photo of my collection in 2019](images/IMG_9417.JPG){fig-align="right" width="400"}![Curing a layer of my NYE manicure in 2022](images/IMG_1645.JPEG){alt="Curing a layer of my NYE day manicure, 2022" fig-align="right" width="400"}
 
 For most of my life, I've painted my nails using nail lacquers, but over the past couple months I have been learning how to do gel manicures. As such, lately I've amassed several gel polishes, soft gel extensions in various shapes and lengths (mostly coffin and stiletto), and many preparation, application, and gel removal tools.
-
-![Curing a layer of my NYE manicure in 2022](images/IMG_1645.JPEG){alt="Curing a layer of my NYE day manicure, 2022" fig-align="center" width="400"}
 
 Things I will do with this project:
 
@@ -34,8 +54,12 @@ Things I will do with this project:
 
 ## Creating the datasets
 
+Because I have so many nail polishes, I created two datasets for this project and then combined them. The first data set consisted of gel polishes, and the second consisted of lacquers. I combined them using `rbind()`.
+
 ```{r}
 library(tidyverse)
+library(showtext)
+font_add_google(name = "Poppins", family = "Poppins")
 ```
 
 ```{r}
@@ -44,7 +68,7 @@ nailpolish_gel <- data.frame (name = c("Freshwater (gel)", "Pooh Bear", "Pineapp
                           brand = c("iGel Beauty", "Aigel", "OPI", "Orly", "Aigel", "Nobility", "DND", "iGel Beauty", "Beetles", "Kiara Sky", "iGel Beauty", "Beetles", "Beetles", "Beetles", "Sumika", "Aigel", "DND", "Kiara Sky", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles", "Beetles"),
                          
                           color_family = c("blue", "multi", "yellow", "multi", "green", "maroon", "blue", "yellow", "pink", "blue", "green", "orange", "yellow", "pink", "blue", "multi", "mood", "mood", "pink", "pink", "green", "pink", "red", "blue", "yellow", "blue", "pink", "purple", "purple", "purple", "orange", "pink", "pink", "blue"),
-                          color_hex = c("#A9CFDC", "#BE969D", "#DEBB75", "#B9A3B1", "#A8C6BF", "#733566", "#4291C8", "#EFE669", "#F7C9B7", "#CEE6E2", "#6BA8A2", "#EB5328", "#E1F14F", "#E93C82", "#A2C0B8", "#CE9AA4", "#8FA260", "#799DC9", "#CFB19A", "#E6CAD6", "#EB5B6D", "#EA526B", "#DF4126", "#98AFBC", "#FCEDBA", "#194584", "#DCB4E4", "#9793C9", "#A19AB7", "#603292", "#F1BAA2", "#EFDDE4", "#E0ABB1", "#AFE8E2"),
+                          color_hex = c("#A9CFDC", "#BE969D", "#DEBB75", "#B9A3B1", "#A8C6BF", "#733566", "#4291C8", "#EFE669", "#F7C9B7", "#CEE6E2", "#6BA8A2", "#EB5328", "#E1F14F", "#E93C82", "#A2C0B8", "#CE9AA4", "#8FA260", "#799DC9", "#CFB19A", "#E6CAD6", "#69E258", "#EA526B", "#DF4126", "#98AFBC", "#FCEDBA", "#194584", "#DCB4E4", "#9793C9", "#A19AB7", "#603292", "#F1BAA2", "#EFDDE4", "#E0ABB1", "#AFE8E2"),
                           
                          year_acquired = c("2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022", "2022"),
                          
@@ -83,7 +107,20 @@ nailpolish <- rbind(nailpolish_gel, nailpolish_laquer)
 print(nailpolish)
 ```
 
+```{r}
+nailpolish$year_acquired <- as.numeric(as.character(nailpolish$year_acquired))
+print(nailpolish)
+sapply(nailpolish, class)
+```
+
 ## Starting to plot
+
+### Taking a look at the data with quick & messy plots
+
+```{r}
+ggplot(nailpolish, aes(color_family, year_acquired, color = color_family)) + 
+  geom_point()
+```
 
 ```{r}
 ggplot(nailpolish, aes(color_family, fill = color_family)) + 
@@ -91,16 +128,13 @@ ggplot(nailpolish, aes(color_family, fill = color_family)) +
 ```
 
 ```{r}
-glimpse(nailpolish)
-```
-
-https://kiarasky.com/blogs/news/our-guide-to-the-different-nail-polish-finishes
-
-plan: panels of bar graphs that measure count of color_family, count of brand, count of year acquired, count of type
-
-```{r}
 ggplot(nailpolish, aes(brand, fill = color_family)) + 
   geom_bar()
+```
+
+```{r}
+ggplot(nailpolish, aes(finish, year_acquired, color = color_family)) + 
+  geom_point()
 ```
 
 ```{r}
@@ -109,22 +143,39 @@ ggplot(nailpolish, aes(color_family, fill = finish)) +
 ```
 
 ```{r}
+library(showtext)
+font_add_google(name = "Lobster", family = "Lobster")
+font_add_google(name = "Ubuntu", family = "Ubuntu")
+font_add_google(name = "Poppins", family = "Poppins")
+```
+
+## Polished plots
+
+```{r}
+nailpolish |>
+  group_by(color_family) |>
+  mutate(n = row_number()) |>
+  ggplot(aes(color_family, n, fill = color_hex)) +
+    geom_raster() +
+    scale_fill_identity() +
+  labs(
+    y = "",
+    x = "",
+    title = "polishes per color family") +
+  theme(panel.background = element_rect(fill = "gray93"),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        plot.background = element_rect(fill = "gray93"),
+        plot.title = element_text(size = 17, hjust = .95),
+        axis.text = element_text(size = 9, color = "black")
+        )
+# need to remove 0 tick mark on y axis and move up x markers (without tick marks)
+```
+
+```{r}
 ggplot(nailpolish, aes(finish, fill = color_family)) + 
   geom_bar()
 ```
-
-```{r}
-nailpolish$year_acquired <- as.numeric(as.character(nailpolish$year_acquired))
-print(nailpolish)
-sapply(nailpolish, class)
-```
-
-```{r}
-ggplot(nailpolish, aes(finish, year_acquired, color = color_family)) + 
-  geom_point()
-```
-
-Need to color_family points to correspond with the color.
 
 ```{r}
 ggplot(nailpolish, aes(color_family, year_acquired, fill = color_family)) + 
@@ -147,23 +198,26 @@ ggplot(nailpolish, aes(year_acquired, finish, fill = color_family)) +
 ```
 
 ```{r}
-ggplot(nailpolish, aes(year_acquired, brand, fill = color_family)) + 
+ggplot(nailpolish, aes(color_family, brand, fill = color_family)) + 
   stat_bin_2d()
 ```
 
 ```{r}
-ggplot(nailpolish, aes(color_family, year_acquired, color = color_family)) + 
-  geom_jitter()
-```
-
-```{r}
-library(ggbeeswarm)
+ggplot(nailpolish, aes(color_family, year_acquired, color = color_hex)) + 
+  geom_jitter() +
+  scale_color_identity()
 ```
 
 ```{r}
 ggplot(nailpolish, aes(year_acquired, color_family, color = color_family)) + 
   geom_jitter() +
   stat_ellipse()
+```
+
+```{r}
+ggplot(nailpolish, aes(year_acquired, color_family, color = color_hex)) + 
+  geom_jitter() +
+  scale_color_identity()
 ```
 
 ```{r}
@@ -207,3 +261,9 @@ what if i multiplied all counts by 100 so none would be dropped?
 could facet by finish
 
 check out colorspace - HCL wizard
+
+https://kiarasky.com/blogs/news/our-guide-to-the-different-nail-polish-finishes
+
+### Issues
+
+I could not change the font using showtext. I repeatedly got the following error: `Error in grid.Call(C_textBounds, as.graphicsAnnot(x$label), x$x, x$y, : polygon edge not found`, which the internet tells me could be a buggy thing?

@@ -36,3 +36,47 @@ sapply(nail_test, class)
 ```{r}
 nail_test
 ```
+
+```{r}
+nailpolish |>
+  group_by(color_family) |>
+  mutate(n = row_number()) |>
+  ggplot(aes(color_family, n, fill = color_hex))+
+    geom_raster()+
+    scale_fill_identity()
+```
+
+```{r}
+library(showtext)
+font_add_google(name = "Poppins", family = "Poppins")
+font_add_google(name = "Pacifico", family = "Pacifico")
+font_add_google(name = "Lobster", family = "Lobster")
+```
+
+```{r}
+nailpolish |>
+  group_by(color_family) |>
+  mutate(n = row_number()) |>
+  ggplot(aes(color_family, n, fill = color_hex)) +
+    geom_raster() +
+    scale_fill_identity() +
+  labs(
+    y = "",
+    x = "",
+    title = "polishs per color family") +
+  theme(
+        panel.background = element_rect(fill = "gray96"),
+        panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank(),
+        plot.title = element_text(family = "Poppins", size = 16, hjust = 0.5),
+        )
+
+
+
+```
+
+```{r}
+ggplot(nailpolish, aes(year_acquired, fill = color_hex)) + 
+  stat_bin(binwidth = 1, position = "fill") +
+  scale_fill_identity()
+```
