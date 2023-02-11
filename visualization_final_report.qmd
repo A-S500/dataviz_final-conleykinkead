@@ -161,15 +161,18 @@ nailpolish |>
   labs(
     y = "",
     x = "",
-    title = "polishes per color family") +
+    title = "polishes by color family") +
+  scale_y_continuous(breaks = c(4, 8, 12)) +
   theme(panel.background = element_rect(fill = "gray93"),
         panel.grid.minor = element_blank(),
         panel.grid.major = element_blank(),
         plot.background = element_rect(fill = "gray93"),
         plot.title = element_text(size = 17, hjust = .95),
-        axis.text = element_text(size = 9, color = "black")
+        axis.text.x = element_text(size = 9, color = "black"),
+        axis.ticks = element_blank(),
+        axis.text.y = element_text(size = 7, color = "gray20")
         )
-# need to remove 0 tick mark on y axis and move up x markers (without tick marks)
+# need to move up x markers and extend axis slightly, and move title down slightly
 ```
 
 ```{r}
